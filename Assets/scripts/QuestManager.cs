@@ -16,7 +16,7 @@ public class QuestManager : ScriptableObject
     {
         for (int i = 0; i < quests.Length; i++)
         {
-            if (quests[i].name == questName)
+            if (quests[i].ID == questName)
                 return quests[i];
         }
 
@@ -27,7 +27,7 @@ public class QuestManager : ScriptableObject
     {
         for (int i = 0; i < activeQuests.Count; i++)
         {
-            if(activeQuests[i].name == questName)
+            if(activeQuests[i].ID == questName)
                 return activeQuests[i];
         }
         return null;
@@ -42,11 +42,13 @@ public class QuestManager : ScriptableObject
 
     public void RegisteListener(IQuestListner listner)
     {
+        Debug.Log("Regist at QuestManager : " + listner);
         listners.Add(listner);
     }
 
     public void UnRegisteListener(IQuestListner listner)
     {
+        Debug.Log("UnRegist at QuestManager : " + listner);
         listners.Remove(listner);
     }
 
@@ -65,6 +67,7 @@ public class QuestManager : ScriptableObject
     public void QuestClear(string questName)
     {
         activeQuests.Remove(GetQuest(questName));
+        Debug.Log(questName + " Complete!!!");
 
         foreach (var listener in listners)
         {
