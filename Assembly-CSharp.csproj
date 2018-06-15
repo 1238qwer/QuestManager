@@ -62,9 +62,13 @@
     <Compile Include="Assets\scripts\AnyScripts.cs" />
     <Compile Include="Assets\scripts\BlockedArea.cs" />
     <Compile Include="Assets\scripts\CheckButton.cs" />
+    <Compile Include="Assets\scripts\ClearGame.cs" />
+    <Compile Include="Assets\scripts\ClearGame1.cs" />
     <Compile Include="Assets\scripts\CompleteWindow.cs" />
+    <Compile Include="Assets\scripts\logger.cs" />
     <Compile Include="Assets\scripts\Monster.cs" />
     <Compile Include="Assets\scripts\PassArea.cs" />
+    <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\Quest.cs" />
     <Compile Include="Assets\scripts\QuestButton.cs" />
     <Compile Include="Assets\scripts\QuestHandler.cs" />

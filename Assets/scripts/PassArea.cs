@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassArea : MonoBehaviour,QuestManager.IQuestListner {
+public class PassArea : MonoBehaviour, Quest.IQuestListner
+{
+    [SerializeField] private Quest onRoute;
 
-    [SerializeField] private QuestManager questManager;
     private List<Transform> sprites = new List<Transform>();
 
-    public void OnQuestClear(string questName)
+    public void OnQuestRaise()
     {
-        if (questName == "monster")
+
+    }
+
+    public void OnQuestClear()
+    {
+        foreach (var item in sprites)
         {
-            foreach (var item in sprites)
-            {
-                item.transform.gameObject.SetActive(false);
-            }
-            questManager.UnRegisteListener(this);
+            item.transform.gameObject.SetActive(false);
         }
+        //onRoute.UnRegistClearLisnter(this);
     }
 
-    public void OnQuestRaise(string questName)
-    {
-
-    }
-
-    // Use this for initialization
     void Awake()
     {
-        questManager.RegisteListener(this);
-        for (int i=0; i<transform.GetChildCount();i++)
+        onRoute.RegistClearLisnter(this);
+        for (int i = 0; i < transform.GetChildCount(); i++)
         {
             sprites.Add(transform.GetChild(i));
         }

@@ -7,10 +7,14 @@ using UnityEditor.MemoryProfiler;
 [CreateAssetMenu]
 public class QuestManager : ScriptableObject
 {
+    public interface IQuestListner
+    {
+        void OnQuestRaise(string questName);
+        void OnQuestClear(string questName);
+    }
+
     public Quest[] quests;
     [SerializeField]private List<Quest> activeQuests = new List<Quest>();
-
-    private List<IQuestListner> listners = new List<IQuestListner>();
 
     public Quest GetQuest(string questName)
     {
@@ -33,45 +37,40 @@ public class QuestManager : ScriptableObject
         return null;
     }
 
+    //public void RegisteListener(IQuestListner listner)
+    //{
+    //    Debug.Log("Regist at QuestManager : " + listner);
+    //    listners.Add(listner);
+    //}
 
-    public interface IQuestListner
-    {
-        void OnQuestRaise(string questName);
-        void OnQuestClear(string questName);
-    }
+    //public void UnRegisteListener(IQuestListner listner)
+    //{
+    //    Debug.Log("UnRegist at QuestManager : " + listner);
+    //    if (listners.Contains(listner))
+    //    listners.Remove(listner);
+    //}
 
-    public void RegisteListener(IQuestListner listner)
-    {
-        Debug.Log("Regist at QuestManager : " + listner);
-        listners.Add(listner);
-    }
+    //public void QuestRaise(string questName)
+    //{
+    //    activeQuests.Add(GetQuest(questName));
 
-    public void UnRegisteListener(IQuestListner listner)
-    {
-        Debug.Log("UnRegist at QuestManager : " + listner);
-        listners.Remove(listner);
-    }
-
-
-
-    public void QuestRaise(string questName)
-    {
-        activeQuests.Add(GetQuest(questName));
-
-        foreach (var listener in listners)
-        {
-            listener.OnQuestRaise(questName);
-        }
-    }
+    //    for (int i = 0; i>=quests.Length;i++)
+    //    {
+    //        for (int j =0; j >= quests[i].questListner.Count; j ++)
+    //        {
+    //            quests[i].questListner[j].OnQuestRaise(questName);
+    //        }
+    //    }
+    //}
 
     public void QuestClear(string questName)
     {
         activeQuests.Remove(GetQuest(questName));
         Debug.Log(questName + " Complete!!!");
 
-        foreach (var listener in listners)
-        {
-            listener.OnQuestClear(questName);
-        }
+        //foreach (var listener in listners)
+        //{
+        //    listener.OnQuestClear(questName);
+        //}
     }
 }

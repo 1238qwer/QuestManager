@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour {
 
-    [SerializeField] private List<QuestManager.IQuestListner> listners = new List<QuestManager.IQuestListner>();
+    [SerializeField] private Quest openRoute;
 
-    public void AddListner(QuestManager.IQuestListner listner)
-    {
-        listners.Add(listner);
-        Debug.Log("Quest Handler Registed : " + listner);
-    }
-
-	void Update () {
+    void Update () {
 		if (Input.GetKeyDown(KeyCode.K))
         {
             OnDeath();
@@ -21,10 +15,7 @@ public class Monster : MonoBehaviour {
 
     void OnDeath()
     {
-        foreach (QuestManager.IQuestListner listener in listners)
-        {
-            listener.OnQuestClear("monster");
-
-        }
+        openRoute.QuestConditionClear("bosskill");
     }
+
 }

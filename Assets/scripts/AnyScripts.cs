@@ -5,8 +5,10 @@ using UnityEngine;
 public class AnyScripts : MonoBehaviour
 {
 
-    [SerializeField] private QuestManager questManager;
-    [SerializeField] private Monster monster;
+    [SerializeField] private Quest onRoute;
+    [SerializeField] private Quest clearGame;
+
+
 
     int index;
     int index2;
@@ -14,26 +16,20 @@ public class AnyScripts : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-	    
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetKeyDown(KeyCode.Q))
-	    {
-	        QuestPost("space");
-	    }
-	    if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            QuestHandler questHandler = new QuestHandler("monster", questManager, monster);
-            QuestPost("monster");
+            onRoute.QuestRaise();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            clearGame.QuestRaise();
         }
 
 
-    }
-
-    public void QuestPost(string missionName)
-    {
-        questManager.QuestRaise(missionName);
     }
 }
